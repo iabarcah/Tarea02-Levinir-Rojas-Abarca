@@ -1,0 +1,6 @@
+{
+"ip" : "127.0.0.2",
+"puerto": 8033,
+"root_dir" : "/home/ignacioabarca/tarea2/www-data",
+"notFoundFile" : "/home/ignacioabarca/tarea2/www-error",
+}
