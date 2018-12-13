@@ -65,28 +65,75 @@ void HandleTCPClient(TCPSocket *sock) {
 	//std::string var3;
 	std::string var3(echoBuffer,5,12);
 	std::cout << var3+"\n\r";
-	std::ifstream caca("www-data/prueba2.html");
-	if(caca.is_open()){
+	
+	std::ifstream arch1("www-data/prueba2.html");
+	std::ifstream arch2("www-data/prueba1.html");
+	std::ifstream arch3("www-data/prueba3.html");
+	std::ifstream arch4("www-error/error404.html");
+	if(var3 == "prueba2.html"){
+	if(arch2.is_open()){
 		std::cout<<"entro\n\r";
-		while(getline(caca,var1)){
+		while(getline(arch1,var1)){
 			var2 = var2 + var1 + "\n";
 		}
-		caca.close();
+		arch1.close();
 	}
 	else{
 		std::cout <<" no se abrio html\r\n";			
 	}
 	sock->send(var2.c_str(),var2.length());
+	}
+	else if(var3 == "prueba1.html"){
+	if(arch2.is_open()){
+		std::cout<<"entro\n\r";
+		while(getline(arch2,var1)){
+			var2 = var2 + var1 + "\n";
+		}
+		arch2.close();
+		
+	}
+	else{
+		std::cout <<" no se abrio html\r\n";			
+	}
+	sock->send(var2.c_str(),var2.length());
+	}
+	else if(var3 == "prueba3.html"){
+	if(arch3.is_open()){
+		std::cout<<"entro\n\r";
+		while(getline(arch3,var1)){
+			var2 = var2 + var1 + "\n";
+		}
+		arch3.close();
+		
+	}
+	else{
+		std::cout <<" no se abrio html\r\n";			
+	}
+	sock->send(var2.c_str(),var2.length());
+	}
+	else{
+	if(arch4.is_open()){
+		std::cout<<"entro\n\r";
+		while(getline(arch4,var1)){
+			var2 = var2 + var1 + "\n";
+		}
+		arch4.close();
+	}
+	else{
+		std::cout <<" no se abrio html\r\n";			
+	}
+	sock->send(var2.c_str(),var2.length());
+	}
 	delete sock;
 }
 
 int main(int argc, char *argv[]) {
-	
+	//json config = new json();
 	checkArgs* argumentos = new checkArgs(argc, argv);
-	
+	//config* cosa = new config(argc,argv);
 	uint16_t echoServPort;   
 	echoServPort  = argumentos->getArgs().PORT;
-	
+	//echoServPort = cosa->puerto;
 	try {
 		TCPServerSocket servSock(echoServPort);     // Server Socket object
 
