@@ -1,5 +1,5 @@
 
-SRC2=echoServerSrc
+SRC2=src
 
 default: all
 
