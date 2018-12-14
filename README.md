@@ -1,6 +1,6 @@
 # Integrantes
 
--  Felipe Leviñir correo: felipe.leviñir@alumnos.uv.cl
+-  Felipe Leviñir correo: felipe.levinir@alumnos.uv.cl
 -  Claudio Rojas  correo : claudio.rojasc@alumnos.uv.cl
 -  Ignacio Abarca correo: ignacio.abarca@alumnos.uv.cl
 
