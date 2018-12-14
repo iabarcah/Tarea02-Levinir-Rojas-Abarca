@@ -49,23 +49,32 @@ void HandleTCPClient(TCPSocket *sock) {
 		// Echo message back to client
 //		sock->send(echoBuffer, recvMsgSize);
 		
-		
-	
+	*/	
+	using json = nlohmann::json;
+	json j2;
+	std::ifstream klo("bin/config.json");
+	if(!klo.is_open()){std::cout<<"error";}
+	klo >> j2;
+	klo.close();
 	/*std::string var1;
 	std::string var2;
 		sock->send("Pichulina\n\r", 32);
 		sock->send("Pichulina2323", 32);}*/
-	//std::cos = sock->recv(echoBuffer[32]);	
+	//std::cos = sock->recv(echoBuffer[32]);
+	//Json::root_dir j;	
 	recvMsgSize = sock->recv(echoBuffer, RCVBUFSIZE);
-	std::cout << echoBuffer; 
+	std::cout << echoBuffer;
 	sock->send("HTTP/1.1 200 OK\r\n",32);
 	sock->send("Content-Type: text/html\r\n\r\n",32);
 	std::string var1;
+	std::string var5;
 	std::string var2="";
 	//std::string var3;
 	std::string var3(echoBuffer,5,12);
-	std::cout << var3+"\n\r";
-	
+	var5.append(j2["root_dir"]);
+	var5.append(var3);
+	std::cout << var5;
+	/*
 	std::ifstream arch1("www-data/prueba2.html");
 	std::ifstream arch2("www-data/prueba1.html");
 	std::ifstream arch3("www-data/prueba3.html");
@@ -123,19 +132,25 @@ void HandleTCPClient(TCPSocket *sock) {
 		std::cout <<" no se abrio html\r\n";			
 	}
 	sock->send(var2.c_str(),var2.length());
-	}
+	}*/
 	delete sock;
 }
 
 int main(int argc, char *argv[]) {
+	using json = nlohmann::json;
+	json j;
+	std::ifstream klo("bin/config.json");
+	if(!klo.is_open()){return false;}
+	klo >> j;
+	klo.close();
 	//json config = new json();
-	checkArgs* argumentos = new checkArgs(argc, argv);
+	//checkArgs* argumentos = new checkArgs(argc, argv);
 	//config* cosa = new config(argc,argv);
 	uint16_t echoServPort;   
-	echoServPort  = argumentos->getArgs().PORT;
-	//echoServPort = cosa->puerto;
+	//echoServPort  = argumentos->getArgs().PORT;
+	echoServPort = j["puerto"];
 	try {
-		TCPServerSocket servSock(echoServPort);     // Server Socket object
+		TCPServerSocket servSock(j["ip"],echoServPort);     // Server Socket object
 
 		for (;;) {   // Run forever
 			HandleTCPClient(servSock.accept());       // Wait for a client to connect
